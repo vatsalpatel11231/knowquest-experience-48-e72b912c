@@ -49,6 +49,26 @@ yarn dev
 
 4. Open your browser and navigate to `http://localhost:8080`
 
+## Troubleshooting Common Issues
+
+### Missing Exports Error
+If you encounter errors like "No matching export in 'src/utils/mockData.js' for import X", ensure that:
+1. The `mockData.js` file includes all necessary exports
+2. Your import statements match the actual export names
+3. Run `npm run dev` again after making changes
+
+### Module Not Found Errors
+If you see errors about missing modules:
+1. Check that all dependencies are installed: `npm install`
+2. Verify that package names are correctly spelled in import statements
+3. Make sure path aliases like `@/` are correctly configured in vite.config.js
+
+### Debugging Process
+1. Check the browser console for detailed error messages
+2. Review the terminal output for build errors
+3. For component rendering issues, add console.log statements to track component lifecycle
+4. Use React DevTools browser extension to inspect component state
+
 ## Connecting with Backend
 To connect this frontend with a Node.js and Express backend:
 
@@ -88,7 +108,21 @@ mongoose.connect(process.env.MONGODB_URI)
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 ```
 
-3. Update the frontend API utilities to connect to your backend:
+3. Create basic route files:
+```javascript
+// routes/auth.js
+const express = require('express');
+const router = express.Router();
+
+router.post('/login', (req, res) => {
+  // Authentication logic here
+  res.json({ success: true, token: 'sample-token' });
+});
+
+module.exports = router;
+```
+
+4. Update the frontend API utilities to connect to your backend:
 ```javascript
 // src/utils/api.js
 const API_URL = 'http://localhost:5000/api';
@@ -99,6 +133,22 @@ export const fetchCourses = async () => {
 };
 
 // Add more API methods as needed
+```
+
+## Project Structure Overview
+```
+rx-lms/
+├── public/
+│   └── lovable-uploads/   # Images and media files
+├── src/
+│   ├── components/        # Reusable UI components
+│   ├── pages/             # Page components
+│   ├── utils/             # Utility functions and mock data
+│   ├── hooks/             # Custom React hooks
+│   ├── lib/               # Library code and helpers
+│   └── App.jsx            # Main application component
+├── vite.config.js         # Vite configuration
+└── README.md              # Project documentation
 ```
 
 ## Future Enhancements

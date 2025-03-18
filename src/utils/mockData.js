@@ -1,4 +1,3 @@
-
 // Mock data for the LMS
 export const courses = [
   {
@@ -434,7 +433,22 @@ export const courseProgressData = [
   }
 ];
 
-// Helper functions
+export const areaData = [
+  { name: "Selling Skills", passing: 150, actual: 140, percentage: 93 },
+  { name: "Product Knowledge", passing: 100, actual: 70, percentage: 70 },
+  { name: "Territory Management", passing: 80, actual: 50, percentage: 63 },
+  { name: "Admin Compliance", passing: 50, actual: 30, percentage: 37 },
+];
+
+export const statData = [
+  { name: "Courses", value: 90, color: "#1E90FF", icon: "book" },
+  { name: "Training Materials", value: 70, color: "#32CD32", icon: "file-text" },
+  { name: "Test", value: 85, color: "#FFA500", icon: "check-square" },
+  { name: "Grades Completed", value: 75, color: "#9370DB", icon: "award" },
+];
+
+export const questions = tests[0].questions;
+
 export function getCourseById(id) {
   return courses.find(course => course.id === id);
 }
