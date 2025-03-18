@@ -16,7 +16,11 @@ const TestCard: React.FC<TestCardProps> = ({ test, categoryView = false }) => {
     if (categoryView) {
       navigate(`/test/${test.category.replace(/\s+/g, '-').toLowerCase()}`);
     } else {
-      navigate(`/test/${test.category.replace(/\s+/g, '-').toLowerCase()}/${test.id}`);
+      if (test.completed) {
+        navigate(`/test/${test.category.replace(/\s+/g, '-').toLowerCase()}/${test.id}`);
+      } else {
+        navigate(`/test/${test.category.replace(/\s+/g, '-').toLowerCase()}/${test.id}/take`);
+      }
     }
   };
 
