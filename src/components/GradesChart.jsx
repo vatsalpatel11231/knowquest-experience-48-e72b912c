@@ -1,7 +1,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Legend, Tooltip } from 'recharts';
-import { gradeData } from '../utils/mockData';
+import { gradeData } from '@/utils/mockData';
 
 const GradesChart = () => {
   const chartRef = useRef(null);

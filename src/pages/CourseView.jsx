@@ -1,11 +1,11 @@
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { isAuthenticated } from '../utils/auth';
-import Header from '../components/Header';
-import Navigation from '../components/Navigation';
-import CourseContent from '../components/CourseContent';
-import { courses, getCourseById } from '../utils/mockData';
+import { isAuthenticated } from '@/utils/auth';
+import Header from '@/components/Header';
+import Navigation from '@/components/Navigation';
+import CourseContent from '@/components/CourseContent';
+import { courses, getCourseById } from '@/utils/mockData';
 
 const CourseView = () => {
   const navigate = useNavigate();

@@ -1,11 +1,11 @@
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { isAuthenticated } from '../utils/auth';
-import Header from '../components/Header';
-import Navigation from '../components/Navigation';
-import CourseCard from '../components/CourseCard';
-import { courses } from '../utils/mockData';
+import { isAuthenticated } from '@/utils/auth';
+import Header from '@/components/Header';
+import Navigation from '@/components/Navigation';
+import CourseCard from '@/components/CourseCard';
+import { courses } from '@/utils/mockData';
 
 const Courses = () => {
   const navigate = useNavigate();

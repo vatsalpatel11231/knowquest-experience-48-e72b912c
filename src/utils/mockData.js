@@ -1,288 +1,452 @@
 
-// Mock data for the LMS application
-
-// Courses data
+// Mock data for the LMS
 export const courses = [
   {
     id: '1',
     title: 'Introduction to Pharmacy',
-    category: 'Pharmacy',
+    category: 'Pharmacy Basics',
     type: 'Video',
-    description: 'Learn the basics of pharmacy practice and principles.',
-    date: 'May 15, 2023',
-    image: '/lovable-uploads/833bd108-f3fe-4772-ae45-c15090d234cf.png',
-    content: [
+    description: 'Learn the fundamentals of pharmacy practice and essential knowledge for beginners.',
+    date: '2023-12-01',
+    image: '/lovable-uploads/e8ae0a33-1b95-417e-96ae-a0d71c0db2d3.jpg',
+    progress: 75,
+    instructor: 'Dr. Maria Santos',
+    duration: '4 hours',
+    modules: [
       {
-        type: 'video',
-        url: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-        title: 'Introduction to Pharmacy'
+        id: 'm1',
+        title: 'History of Pharmacy',
+        duration: '45 minutes',
+        status: 'completed'
       },
       {
-        type: 'text',
-        content: 'Pharmacy is the clinical health science that links medical science with chemistry and it is charged with the discovery, production, disposal, safe and effective use, and control of medications and drugs.'
+        id: 'm2',
+        title: 'Pharmacy Ethics',
+        duration: '1 hour',
+        status: 'completed'
+      },
+      {
+        id: 'm3',
+        title: 'Pharmacy Regulations',
+        duration: '1 hour',
+        status: 'in-progress'
+      },
+      {
+        id: 'm4',
+        title: 'Pharmacy Practice Settings',
+        duration: '1.25 hours',
+        status: 'not-started'
       }
     ]
   },
   {
     id: '2',
-    title: 'Medication Safety',
-    category: 'Pharmacy',
-    type: 'Document',
-    description: 'Important guidelines for ensuring medication safety.',
-    date: 'June 2, 2023',
-    image: '/lovable-uploads/4cddec2e-7e94-4604-ae07-59920d7692cf.png',
-    content: [
+    title: 'Pharmaceutical Calculations',
+    category: 'Pharmacy Basics',
+    type: 'Interactive',
+    description: 'Master the essential calculations required in pharmaceutical practice.',
+    date: '2023-12-05',
+    image: '/lovable-uploads/93743b98-7ca5-4693-8d6d-aaaaabbb9d01.jpg',
+    progress: 30,
+    instructor: 'Dr. Robert Chen',
+    duration: '6 hours',
+    modules: [
       {
-        type: 'text',
-        content: 'Medication safety is a key aspect of pharmacy practice. This course covers the essential guidelines for ensuring patient safety through proper medication management.'
+        id: 'm1',
+        title: 'Units and Measurements',
+        duration: '1 hour',
+        status: 'completed'
       },
       {
-        type: 'image',
-        url: '/lovable-uploads/00a8c6c8-0cfa-47d6-9809-ede27a8f26db.png',
-        caption: 'Medication Safety Process'
+        id: 'm2',
+        title: 'Dosage Calculations',
+        duration: '2 hours',
+        status: 'in-progress'
+      },
+      {
+        id: 'm3',
+        title: 'Dilution and Concentration',
+        duration: '1.5 hours',
+        status: 'not-started'
+      },
+      {
+        id: 'm4',
+        title: 'IV Flow Rates',
+        duration: '1.5 hours',
+        status: 'not-started'
       }
     ]
   },
   {
     id: '3',
-    title: 'Patient Care Principles',
-    category: 'Healthcare',
-    type: 'Interactive',
-    description: 'Learn effective patient care principles for healthcare professionals.',
-    date: 'April 10, 2023',
-    image: '/lovable-uploads/833bd108-f3fe-4772-ae45-c15090d234cf.png',
-    content: [
+    title: 'Medication Therapy Management',
+    category: 'Clinical Pharmacy',
+    type: 'Video',
+    description: 'Learn advanced techniques for patient medication management and optimization.',
+    date: '2023-11-15',
+    image: '/lovable-uploads/93743b98-7ca5-4693-8d6d-bbbbccccd01.jpg',
+    progress: 90,
+    instructor: 'Dr. Lisa Johnson',
+    duration: '8 hours',
+    modules: [
       {
-        type: 'text',
-        content: 'This course focuses on patient-centered care principles that are essential for all healthcare professionals.'
+        id: 'm1',
+        title: 'MTM Overview',
+        duration: '1 hour',
+        status: 'completed'
       },
       {
-        type: 'quiz',
-        questions: [
-          {
-            question: 'What is the primary focus of patient-centered care?',
-            options: [
-              'Hospital procedures',
-              'Patient needs and preferences',
-              'Medical records',
-              'Staff scheduling'
-            ],
-            answer: 1
-          }
-        ]
+        id: 'm2',
+        title: 'Patient Assessment',
+        duration: '2 hours',
+        status: 'completed'
+      },
+      {
+        id: 'm3',
+        title: 'Care Planning',
+        duration: '2 hours',
+        status: 'completed'
+      },
+      {
+        id: 'm4',
+        title: 'Follow-up and Documentation',
+        duration: '3 hours',
+        status: 'in-progress'
       }
     ]
   },
   {
     id: '4',
-    title: 'Healthcare Ethics',
-    category: 'Healthcare',
-    type: 'Document',
-    description: 'Explore ethical considerations in healthcare settings.',
-    date: 'July 5, 2023',
-    image: '/lovable-uploads/4cddec2e-7e94-4604-ae07-59920d7692cf.png',
-    content: [
+    title: 'Pharmacotherapy of Cardiovascular Disorders',
+    category: 'Clinical Pharmacy',
+    type: 'Interactive',
+    description: 'Comprehensive review of medications used to treat cardiovascular conditions.',
+    date: '2024-01-10',
+    image: '/lovable-uploads/93743b98-7ca5-4693-8d6d-ddddeeeef01.jpg',
+    progress: 0,
+    instructor: 'Dr. James Wilson',
+    duration: '10 hours',
+    modules: [
       {
-        type: 'text',
-        content: 'Healthcare ethics involves the principles and values that guide decision-making in healthcare settings.'
+        id: 'm1',
+        title: 'Hypertension',
+        duration: '2 hours',
+        status: 'not-started'
+      },
+      {
+        id: 'm2',
+        title: 'Heart Failure',
+        duration: '2 hours',
+        status: 'not-started'
+      },
+      {
+        id: 'm3',
+        title: 'Arrhythmias',
+        duration: '2 hours',
+        status: 'not-started'
+      },
+      {
+        id: 'm4',
+        title: 'Dyslipidemia',
+        duration: '2 hours',
+        status: 'not-started'
+      },
+      {
+        id: 'm5',
+        title: 'Case Studies',
+        duration: '2 hours',
+        status: 'not-started'
       }
     ]
   },
   {
     id: '5',
-    title: 'Pharmaceutical Calculations',
-    category: 'Pharmacy Math',
-    type: 'Interactive',
-    description: 'Master essential calculations used in pharmacy.',
-    date: 'May 20, 2023',
-    image: '/lovable-uploads/833bd108-f3fe-4772-ae45-c15090d234cf.png',
-    content: [
+    title: 'Pharmacy Law and Regulations',
+    category: 'Regulatory Affairs',
+    type: 'Video',
+    description: 'Essential legal knowledge for pharmacy practice in the Philippines.',
+    date: '2023-12-20',
+    image: '/lovable-uploads/93743b98-7ca5-4693-8d6d-ffffgggg001.jpg',
+    progress: 50,
+    instructor: 'Atty. Manuel Reyes',
+    duration: '6 hours',
+    modules: [
       {
-        type: 'text',
-        content: 'This course covers the fundamental calculations required in pharmaceutical practice.'
+        id: 'm1',
+        title: 'Pharmacy Law Basics',
+        duration: '1 hour',
+        status: 'completed'
       },
       {
-        type: 'exercise',
-        problems: [
-          'Calculate the quantity of active ingredient in a 250mg tablet that is 10% active ingredient.',
-          'If a medication requires 5mg/kg, calculate the dose for a 70kg patient.'
-        ]
+        id: 'm2',
+        title: 'Controlled Substances',
+        duration: '2 hours',
+        status: 'completed'
+      },
+      {
+        id: 'm3',
+        title: 'FDA Regulations',
+        duration: '1.5 hours',
+        status: 'in-progress'
+      },
+      {
+        id: 'm4',
+        title: 'Pharmacy Operations Law',
+        duration: '1.5 hours',
+        status: 'not-started'
       }
     ]
   },
   {
     id: '6',
-    title: 'Regulatory Compliance',
-    category: 'Compliance',
-    type: 'Video',
-    description: 'Stay updated on regulatory requirements for pharmacies.',
-    date: 'June 15, 2023',
-    image: '/lovable-uploads/4cddec2e-7e94-4604-ae07-59920d7692cf.png',
-    content: [
+    title: 'Pharmaceutical Compounding',
+    category: 'Pharmacy Practice',
+    type: 'Interactive',
+    description: 'Hands-on techniques for pharmaceutical compounding and preparation.',
+    date: '2024-01-05',
+    image: '/lovable-uploads/93743b98-7ca5-4693-8d6d-hhhijjjk01.jpg',
+    progress: 15,
+    instructor: 'Dr. Sofia Cruz',
+    duration: '8 hours',
+    modules: [
       {
-        type: 'video',
-        url: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-        title: 'Pharmacy Regulations Overview'
+        id: 'm1',
+        title: 'Compounding Basics',
+        duration: '1 hour',
+        status: 'completed'
+      },
+      {
+        id: 'm2',
+        title: 'Non-sterile Compounding',
+        duration: '3 hours',
+        status: 'in-progress'
+      },
+      {
+        id: 'm3',
+        title: 'Sterile Compounding',
+        duration: '3 hours',
+        status: 'not-started'
+      },
+      {
+        id: 'm4',
+        title: 'Quality Control',
+        duration: '1 hour',
+        status: 'not-started'
       }
     ]
   }
 ];
 
-// Tests data
 export const tests = [
   {
     id: 't1',
     name: 'Pharmacy Basics Assessment',
-    category: 'Pharmacy',
+    category: 'Pharmacy Basics',
     type: 'Multiple Choice',
-    dueDate: 'June 30, 2023',
-    outOf: 10,
+    dueDate: 'Jan 15, 2024',
+    outOf: 100,
+    score: 85,
     completed: true,
-    score: 8,
     questions: [
       {
         id: 'q1',
-        question: 'What is the primary role of a pharmacist?',
+        text: 'Which of the following is NOT a common dosage form?',
         options: [
-          'Diagnosing medical conditions',
-          'Dispensing medications and counseling patients',
-          'Performing surgical procedures',
-          'Conducting clinical trials'
+          'Tablet', 
+          'Capsule', 
+          'Ointment', 
+          'Frequency'
         ],
-        correctAnswer: 1
+        correct: 3
       },
-      // More questions...
+      {
+        id: 'q2',
+        text: 'What is the primary role of a community pharmacist?',
+        options: [
+          'Performing surgeries', 
+          'Dispensing medications', 
+          'Hospital administration', 
+          'Laboratory testing'
+        ],
+        correct: 1
+      },
+      {
+        id: 'q3',
+        text: 'Which regulatory body oversees drug approvals in the Philippines?',
+        options: [
+          'FDA', 
+          'PRC', 
+          'DOH', 
+          'All of the above'
+        ],
+        correct: 0
+      }
     ]
   },
   {
     id: 't2',
-    name: 'Medication Safety Quiz',
-    category: 'Pharmacy',
+    name: 'Pharmaceutical Calculations Quiz',
+    category: 'Pharmacy Basics',
     type: 'Multiple Choice',
-    dueDate: 'July 15, 2023',
-    outOf: 10,
-    completed: false,
-    questions: [
-      {
-        id: 'q1',
-        question: 'Which of the following is NOT a medication safety practice?',
-        options: [
-          'Double-checking high-risk medications',
-          'Using tall man lettering for look-alike medications',
-          'Storing all medications together regardless of type',
-          'Implementing barcode medication administration'
-        ],
-        correctAnswer: 2
-      },
-      // More questions...
-    ]
+    dueDate: 'Jan 20, 2024',
+    outOf: 50,
+    completed: false
   },
   {
     id: 't3',
-    name: 'Patient Care Ethics',
-    category: 'Healthcare',
-    type: 'True/False',
-    dueDate: 'June 25, 2023',
-    outOf: 5,
-    completed: true,
-    score: 5,
-    questions: [
-      {
-        id: 'q1',
-        question: 'Patient confidentiality can be breached if the information seems harmless.',
-        options: ['True', 'False'],
-        correctAnswer: 1
-      },
-      // More questions...
-    ]
+    name: 'Clinical Pharmacy Midterm',
+    category: 'Clinical Pharmacy',
+    type: 'Multiple Choice',
+    dueDate: 'Feb 5, 2024',
+    outOf: 100,
+    completed: false
   },
   {
     id: 't4',
-    name: 'Healthcare Systems Overview',
-    category: 'Healthcare',
+    name: 'Cardiovascular Medications Assessment',
+    category: 'Clinical Pharmacy',
     type: 'Multiple Choice',
-    dueDate: 'July 20, 2023',
-    outOf: 15,
-    completed: false,
+    dueDate: 'Jan 25, 2024',
+    outOf: 50,
+    score: 42,
+    completed: true,
     questions: [
       {
         id: 'q1',
-        question: 'Which of the following best describes a single-payer healthcare system?',
+        text: 'Which class of medication is primarily used to treat hypertension?',
         options: [
-          'Multiple private insurance companies competing for customers',
-          'Government providing healthcare for only those who cannot afford it',
-          'One governmental entity paying for healthcare for all citizens',
-          'Individuals paying out-of-pocket for all healthcare needs'
+          'Antibiotics', 
+          'ACE inhibitors', 
+          'Antihistamines', 
+          'Antipsychotics'
         ],
-        correctAnswer: 2
+        correct: 1
       },
-      // More questions...
+      {
+        id: 'q2',
+        text: 'What is the primary mechanism of action for beta blockers?',
+        options: [
+          'Block calcium channels', 
+          'Block beta-adrenergic receptors', 
+          'Inhibit ACE enzyme', 
+          'Block sodium channels'
+        ],
+        correct: 1
+      },
+      {
+        id: 'q3',
+        text: 'Which medication is NOT used for treating heart failure?',
+        options: [
+          'Lisinopril', 
+          'Carvedilol', 
+          'Furosemide', 
+          'Diphenhydramine'
+        ],
+        correct: 3
+      }
     ]
   },
   {
     id: 't5',
-    name: 'Pharmaceutical Calculations Test',
-    category: 'Pharmacy Math',
-    type: 'Calculation',
-    dueDate: 'July 5, 2023',
-    outOf: 20,
-    completed: true,
-    score: 18,
-    questions: [
-      {
-        id: 'q1',
-        question: 'A medication requires a dose of 2mg/kg. Calculate the dose for a 75kg patient.',
-        correctAnswer: '150mg'
-      },
-      // More questions...
-    ]
+    name: 'Pharmacy Law Examination',
+    category: 'Regulatory Affairs',
+    type: 'Multiple Choice',
+    dueDate: 'Feb 10, 2024',
+    outOf: 75,
+    completed: false
   },
   {
     id: 't6',
-    name: 'Regulatory Compliance Check',
-    category: 'Compliance',
+    name: 'Compounding Techniques Quiz',
+    category: 'Pharmacy Practice',
     type: 'Multiple Choice',
-    dueDate: 'August 1, 2023',
-    outOf: 10,
-    completed: false,
-    questions: [
-      {
-        id: 'q1',
-        question: 'How often are pharmacies typically required to perform a controlled substance inventory?',
-        options: [
-          'Every day',
-          'Every week',
-          'Every month',
-          'Every two years'
-        ],
-        correctAnswer: 3
-      },
-      // More questions...
-    ]
+    dueDate: 'Jan 18, 2024',
+    outOf: 40,
+    score: 38,
+    completed: true
   }
 ];
 
-// Grade data for charts
 export const gradeData = [
-  { month: 'Jan', passing: 70, actual: 78 },
-  { month: 'Feb', passing: 70, actual: 82 },
-  { month: 'Mar', passing: 70, actual: 75 },
-  { month: 'Apr', passing: 70, actual: 68 },
-  { month: 'May', passing: 70, actual: 73 },
-  { month: 'Jun', passing: 70, actual: 85 }
+  { month: 'Jan', passing: 70, actual: 75 },
+  { month: 'Feb', passing: 70, actual: 68 },
+  { month: 'Mar', passing: 70, actual: 72 },
+  { month: 'Apr', passing: 70, actual: 78 },
+  { month: 'May', passing: 70, actual: 82 },
+  { month: 'Jun', passing: 70, actual: 76 }
 ];
 
-// Function to get a course by its ID
-export const getCourseById = (courseId) => {
-  return courses.find(course => course.id === courseId) || null;
-};
+export const upcomingTestsData = [
+  { 
+    id: 'ut1',
+    title: 'Pharmaceutical Calculations',
+    date: 'Jan 20, 2024',
+    time: '10:00 AM',
+    duration: '1 hour',
+    status: 'Upcoming'
+  },
+  { 
+    id: 'ut2',
+    title: 'Clinical Pharmacy Midterm',
+    date: 'Feb 5, 2024',
+    time: '2:00 PM',
+    duration: '2 hours',
+    status: 'Upcoming'
+  },
+  { 
+    id: 'ut3',
+    title: 'Pharmacy Law Examination',
+    date: 'Feb 10, 2024',
+    time: '9:00 AM',
+    duration: '1.5 hours',
+    status: 'Upcoming'
+  }
+];
 
-// Function to get tests by category
-export const getTestsByCategory = (category) => {
+export const courseProgressData = [
+  {
+    id: 'cp1',
+    title: 'Pharmacy Basics',
+    progress: 75,
+    totalCourses: 2,
+    completedCourses: 1,
+  },
+  {
+    id: 'cp2',
+    title: 'Clinical Pharmacy',
+    progress: 45,
+    totalCourses: 2,
+    completedCourses: 0,
+  },
+  {
+    id: 'cp3',
+    title: 'Regulatory Affairs',
+    progress: 50,
+    totalCourses: 1,
+    completedCourses: 0,
+  },
+  {
+    id: 'cp4',
+    title: 'Pharmacy Practice',
+    progress: 15,
+    totalCourses: 1,
+    completedCourses: 0,
+  }
+];
+
+// Helper functions
+export function getCourseById(id) {
+  return courses.find(course => course.id === id);
+}
+
+export function getTestById(id) {
+  return tests.find(test => test.id === id);
+}
+
+export function getCoursesByCategory(category) {
+  return courses.filter(course => course.category === category);
+}
+
+export function getTestsByCategory(category) {
   return tests.filter(test => test.category === category);
-};
-
-// Function to get a test by its ID
-export const getTestById = (testId) => {
-  return tests.find(test => test.id === testId) || null;
-};
+}

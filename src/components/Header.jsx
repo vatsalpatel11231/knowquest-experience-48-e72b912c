@@ -2,7 +2,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
-import { logout } from '../utils/auth';
+import { logout } from '@/utils/auth';
 
 const Header = ({
   title = 'RX LMS',
