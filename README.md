@@ -1,190 +1,187 @@
 
 # RX LMS - Learning Management System
 
-![RX LMS](public/lovable-uploads/ff03aa8b-54cf-42fb-a7c8-820818f40272.png)
+![RX LMS Logo](public/og-image.png)
 
-RX LMS is a comprehensive Learning Management System designed for pharmaceutical companies to train their sales representatives. This frontend application provides an intuitive interface for users to access courses, take tests, and track their progress in a professional learning environment.
+## Overview
 
-## Project Overview
+RX LMS is a modern Learning Management System built with React. It provides a comprehensive platform for organizations to deliver training content, assessments, and track employee progress. The system features an intuitive user interface, responsive design, and a modular architecture.
 
-This is a modern React-based Learning Management System with the following key features:
+## Features
 
-- **User Authentication:** Secure login system with JWT authentication support
-- **Dashboard:** Interactive dashboard showing performance metrics and learning progress
-- **Courses:** Structured course library with filtering and search capabilities
-- **Tests:** Assessment module with various question types and immediate feedback
-- **Responsive Design:** Full support for desktop, tablet, and mobile devices
-
-## Technology Stack
-
-- **Frontend Framework:** React.js with TypeScript
-- **Routing:** React Router for navigation
-- **Styling:** Tailwind CSS for responsive design
-- **UI Components:** shadcn/ui component library
-- **State Management:** React Context API and React Query
-- **Icons:** Lucide React icons
-- **Charts:** Recharts for data visualization
-- **Build Tool:** Vite for fast development and optimized builds
+- **Authentication System**: Secure login/logout functionality
+- **Dashboard**: Overview of learning progress and statistics
+- **Course Management**: Browse and take courses in different categories
+- **Assessment Module**: Take tests and view results
+- **User Profile**: Manage personal information and account settings
+- **Responsive Design**: Works on desktop, tablet, and mobile devices
 
 ## Project Structure
 
 ```
-src/
-├── components/         # Reusable UI components
-│   ├── ui/             # shadcn UI components
-│   ├── Header.tsx      # App header with navigation
-│   ├── Navigation.tsx  # Bottom navigation bar
-│   ├── CourseCard.tsx  # Card component for courses
-│   ├── TestCard.tsx    # Card component for tests
-│   └── ...
-├── hooks/              # Custom React hooks
-├── lib/                # Utility functions and helpers
-├── pages/              # Application pages
-│   ├── Login.tsx       # Authentication page
-│   ├── Dashboard.tsx   # Main dashboard
-│   ├── Courses.tsx     # Courses overview
-│   ├── CourseDetails.tsx  # Category view of courses
-│   ├── CourseView.tsx     # Individual course view
-│   ├── Test.tsx        # Tests overview
-│   ├── TestDetails.tsx # Category view of tests
-│   ├── TakeTest.tsx    # Test-taking interface
-│   └── NotFound.tsx    # 404 page
-├── utils/              # Utility functions
-│   ├── auth.ts         # Authentication helpers
-│   └── mockData.ts     # Mock data for development
-├── App.tsx             # Main application component
-└── main.tsx            # Entry point
+rx-lms/
+├── public/               # Static assets
+├── src/                  # Source code
+│   ├── components/       # Reusable UI components
+│   │   ├── ui/           # Shadcn UI components
+│   │   └── ...           # Custom components
+│   ├── hooks/            # Custom React hooks
+│   ├── lib/              # Utility libraries
+│   ├── pages/            # Page components
+│   ├── utils/            # Helper functions and utilities
+│   ├── App.jsx           # Main application component
+│   ├── App.css           # Global styles
+│   ├── index.css         # Tailwind and base styles
+│   └── main.jsx          # Entry point
+├── .eslintrc.js          # ESLint configuration
+├── index.html            # HTML entry point
+├── package.json          # Project dependencies and scripts
+├── tailwind.config.js    # Tailwind CSS configuration
+└── vite.config.js        # Vite configuration
 ```
+
+## Key Components
+
+- **Authentication**: Manages user login/logout and session persistence
+- **Navigation**: Bottom navigation bar for easy access to main sections
+- **Header**: Displays page title, user info, and back button when needed
+- **CourseCard/TestCard**: Display course and test information in a visually appealing way
+- **ResultModal**: Shows test results with animations and visual indicators
+- **TestInstructions**: Displays test guidelines before starting an assessment
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js (v14 or higher)
-- npm or yarn package manager
+- Node.js (v14.0.0 or newer)
+- npm or yarn
 
 ### Installation
 
-1. Clone the repository
+1. Clone the repository:
 ```bash
 git clone https://github.com/your-username/rx-lms.git
 cd rx-lms
 ```
 
-2. Install dependencies
+2. Install dependencies:
 ```bash
 npm install
 # or
 yarn install
 ```
 
-3. Start the development server
+3. Start the development server:
 ```bash
 npm run dev
 # or
 yarn dev
 ```
 
-4. Open your browser and navigate to http://localhost:5173
+4. Open your browser and navigate to `http://localhost:5173`
 
-### Test Account
+### Demo Credentials
 
-Use the following credentials to log in:
-- **Username:** Admin
-- **Password:** Admin@123
-
-## Backend Integration
-
-This frontend is designed to be easily integrated with a Node.js and Express.js backend. Here's how to connect the frontend to your backend:
-
-1. Set up environment variables for API endpoints in a `.env` file:
-```
-VITE_API_URL=http://localhost:3000/api
-```
-
-2. Replace the mock API calls in `utils/` with real API calls. For example:
-```typescript
-// Before (mock data):
-export const getCourses = () => {
-  return courses;
-};
-
-// After (real API):
-export const getCourses = async () => {
-  const response = await fetch(`${import.meta.env.VITE_API_URL}/courses`);
-  if (!response.ok) throw new Error('Failed to fetch courses');
-  return response.json();
-};
-```
-
-3. Replace the authentication logic in `utils/auth.ts` with JWT authentication:
-```typescript
-// Before (mock auth):
-export const login = (username: string, password: string) => {
-  if (username === 'Admin' && password === 'Admin@123') {
-    localStorage.setItem('user', JSON.stringify({ username }));
-    return true;
-  }
-  return false;
-};
-
-// After (JWT auth):
-export const login = async (username: string, password: string) => {
-  const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ username, password }),
-  });
-  
-  if (!response.ok) return false;
-  
-  const { token, user } = await response.json();
-  localStorage.setItem('token', token);
-  localStorage.setItem('user', JSON.stringify(user));
-  return true;
-};
-```
-
-4. Update API request functions to include the authentication token:
-```typescript
-const fetchWithAuth = async (url: string, options = {}) => {
-  const token = localStorage.getItem('token');
-  return fetch(url, {
-    ...options,
-    headers: {
-      ...options.headers,
-      'Authorization': `Bearer ${token}`,
-    },
-  });
-};
-```
+- Username: Admin
+- Password: Admin@123
 
 ## Customization
 
-### Theming
+### Theme Colors
 
-The application uses a custom color scheme defined in `tailwind.config.ts`. To modify the colors:
+The project uses a custom color palette defined in the tailwind configuration:
 
-1. Open `tailwind.config.ts`
-2. Update the color values in the theme section:
-```typescript
-// Current colors
-maroon: '#750d1f',
-green: '#125b48',
+- Primary Green: `#125b48`
+- Dark Green: `#0d4435`
+- Maroon: `#750d1f`
+- Dark Maroon: `#5a0a18`
+- Header Gray: `#d9d9d9`
+- Background: `#f3f3f3`
+
+To modify these colors, edit the `tailwind.config.js` file.
+
+### Fonts
+
+The project uses the Poppins font family. To change the font, update the Google Fonts link in `index.html` and modify the font family in `tailwind.config.js`.
+
+## Adding Backend Integration
+
+To integrate the RX LMS with a backend server:
+
+1. Set up a backend API using Node.js (Express, NestJS, etc.)
+2. Create API endpoints for:
+   - Authentication (login, logout, password reset)
+   - User management
+   - Course management
+   - Test management
+   - Progress tracking
+
+3. Update the auth utilities in `src/utils/auth.js` to connect to your API:
+
+```javascript
+// Example of updated login function with real API
+export const login = async (username, password) => {
+  try {
+    const response = await fetch('https://your-api.com/api/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ username, password }),
+    });
+    
+    const data = await response.json();
+    
+    if (!response.ok) {
+      throw new Error(data.message || 'Login failed');
+    }
+    
+    localStorage.setItem("lms-user", JSON.stringify(data.user));
+    localStorage.setItem("lms-token", data.token);
+    
+    toast.success("Login Successful");
+    return data.user;
+  } catch (error) {
+    toast.error(error.message || "An error occurred during login");
+    return null;
+  }
+};
 ```
 
-### Adding New Features
+4. Create an API service to handle data fetching:
 
-To add new features to the application:
+```javascript
+// src/services/api.js
+const API_URL = 'https://your-api.com/api';
 
-1. Create any necessary components in the `components/` directory
-2. Add new pages in the `pages/` directory
-3. Update routing in `App.tsx` to include the new pages
-4. Modify the navigation in `Navigation.tsx` if needed
+const getToken = () => localStorage.getItem('lms-token');
+
+export const fetchCourses = async () => {
+  const response = await fetch(`${API_URL}/courses`, {
+    headers: {
+      'Authorization': `Bearer ${getToken()}`
+    }
+  });
+  return response.json();
+};
+
+export const fetchTests = async () => {
+  const response = await fetch(`${API_URL}/tests`, {
+    headers: {
+      'Authorization': `Bearer ${getToken()}`
+    }
+  });
+  return response.json();
+};
+
+// Add more API methods as needed
+```
+
+5. Replace mock data references in components with API calls
 
 ## Deployment
 
-### Build for Production
+To build the project for production:
 
 ```bash
 npm run build
@@ -192,29 +189,27 @@ npm run build
 yarn build
 ```
 
-This will create a `dist` directory with optimized production files.
-
-### Deploying to a Server
-
-Upload the contents of the `dist` directory to your web server or use a service like Netlify, Vercel, or GitHub Pages.
-
-### Environment Variables
-
-For production, set the appropriate environment variables:
-
-```
-VITE_API_URL=https://your-api-server.com/api
-```
+The build output will be in the `dist` directory, which can be deployed to any static web hosting service (Netlify, Vercel, AWS S3, etc.).
 
 ## Contributing
 
 1. Fork the repository
-2. Create a new branch (`git checkout -b feature/your-feature`)
-3. Make your changes
-4. Commit your changes (`git commit -m 'Add some feature'`)
-5. Push to the branch (`git push origin feature/your-feature`)
-6. Open a Pull Request
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgments
+
+- [React](https://reactjs.org/)
+- [Vite](https://vitejs.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Lucide Icons](https://lucide.dev/)
+- [Shadcn UI](https://ui.shadcn.com/)
+- [Recharts](https://recharts.org/)
+- [React Router](https://reactrouter.com/)
+- [React Query](https://tanstack.com/query/latest)
