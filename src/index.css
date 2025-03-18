@@ -1,3 +1,6 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -13,16 +16,16 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 120 100% 20%;  /* Dark Green */
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 0 100% 25%;  /* Maroon */
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 210 40% 96.1%;
+    --muted: 0 0% 96%;  /* Light Gray */
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 210 40% 96.1%;
+    --accent: 0 0% 83%;  /* Medium Gray */
     --accent-foreground: 222.2 47.4% 11.2%;
 
     --destructive: 0 84.2% 60.2%;
@@ -35,19 +38,12 @@
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
@@ -96,6 +92,102 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-light-gray text-foreground font-sans;
   }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-bold;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-white bg-opacity-70 backdrop-blur-sm border border-white border-opacity-20 shadow-glass;
+  }
+
+  .glass-card-dark {
+    @apply bg-black bg-opacity-30 backdrop-blur-sm border border-white border-opacity-10 shadow-glass;
+  }
+
+  .lms-header {
+    @apply bg-maroon text-white h-16 flex items-center justify-between px-6 w-full;
+  }
+
+  .lms-subheader {
+    @apply flex justify-between items-center mb-6;
+  }
+
+  .lms-container {
+    @apply container mx-auto p-6 max-w-7xl;
+  }
+
+  .lms-panel {
+    @apply bg-white rounded-lg shadow-md p-6 transition-all duration-300;
+  }
+
+  .lms-card {
+    @apply rounded-lg overflow-hidden transition-all duration-300 hover:shadow-lg;
+  }
+
+  .lms-button-primary {
+    @apply bg-green text-white px-6 py-2 rounded-md font-medium transition-colors duration-200 
+           hover:bg-dark-green focus:outline-none focus:ring-2 focus:ring-green focus:ring-opacity-50 
+           uppercase tracking-wider;
+  }
+
+  .lms-button-secondary {
+    @apply bg-maroon text-white px-6 py-2 rounded-md font-medium transition-colors duration-200 
+           hover:bg-dark-maroon focus:outline-none focus:ring-2 focus:ring-maroon focus:ring-opacity-50
+           uppercase tracking-wider;
+  }
+
+  .lms-button-outline {
+    @apply border-2 border-green text-green px-6 py-2 rounded-md font-medium transition-colors duration-200
+           hover:bg-green hover:text-white focus:outline-none focus:ring-2 focus:ring-green focus:ring-opacity-50
+           uppercase tracking-wider;
+  }
+
+  .lms-input {
+    @apply bg-medium-gray rounded-md px-4 py-3 w-full focus:outline-none focus:ring-2 focus:ring-green;
+  }
+
+  .lms-dropdown {
+    @apply bg-green text-white px-4 py-2 rounded-md inline-flex items-center space-x-2 
+           hover:bg-dark-green focus:outline-none focus:ring-2 focus:ring-green;
+  }
+
+  .lms-link {
+    @apply text-green hover:text-dark-green transition-colors duration-200;
+  }
+
+  .nav-item {
+    @apply flex flex-col items-center justify-center text-white text-xs font-medium space-y-1;
+  }
+
+  .nav-item-active {
+    @apply text-white opacity-100;
+  }
+
+  .nav-item-inactive {
+    @apply text-white opacity-70 hover:opacity-100 transition-opacity duration-200;
+  }
+
+  .nav-icon {
+    @apply w-6 h-6;
+  }
+}
+
+/* Animation Classes */
+.hover-scale {
+  @apply transition-transform duration-200 hover:scale-105;
+}
+
+.hover-elevate {
+  @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
+}
+
+.card-link {
+  @apply relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 
+         after:bg-green after:transform after:scale-x-0 after:transition-transform 
+         after:duration-300 hover:after:scale-x-100 after:origin-bottom-left;
 }
