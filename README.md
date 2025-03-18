@@ -1,73 +1,35 @@
 
 # RX LMS - Learning Management System
 
-![RX LMS](public/lovable-uploads/ff03aa8b-54cf-42fb-a7c8-820818f40272.png)
-
-RX LMS is a comprehensive Learning Management System designed for pharmaceutical companies to train their sales representatives. This frontend application provides an intuitive interface for users to access courses, take tests, and track their progress in a professional learning environment.
-
 ## Project Overview
+RX LMS is a comprehensive learning management system designed for pharmaceutical education and training. It provides a platform for users to access courses, take tests, and track their progress in pharmaceutical knowledge and certification.
 
-This is a modern React-based Learning Management System with the following key features:
+## Features
+- User authentication and session management
+- Dashboard with progress tracking and analytics
+- Course catalog organized by categories
+- Interactive course content viewer
+- Test-taking platform with immediate feedback
+- User profile and progress management
 
-- **User Authentication:** Secure login system with JWT authentication support
-- **Dashboard:** Interactive dashboard showing performance metrics and learning progress
-- **Courses:** Structured course library with filtering and search capabilities
-- **Tests:** Assessment module with various question types and immediate feedback
-- **Responsive Design:** Full support for desktop, tablet, and mobile devices
-
-## Technology Stack
-
-- **Frontend Framework:** React.js with TypeScript
-- **Routing:** React Router for navigation
-- **Styling:** Tailwind CSS for responsive design
-- **UI Components:** shadcn/ui component library
-- **State Management:** React Context API and React Query
-- **Icons:** Lucide React icons
-- **Charts:** Recharts for data visualization
-- **Build Tool:** Vite for fast development and optimized builds
-
-## Project Structure
-
-```
-src/
-├── components/         # Reusable UI components
-│   ├── ui/             # shadcn UI components
-│   ├── Header.tsx      # App header with navigation
-│   ├── Navigation.tsx  # Bottom navigation bar
-│   ├── CourseCard.tsx  # Card component for courses
-│   ├── TestCard.tsx    # Card component for tests
-│   └── ...
-├── hooks/              # Custom React hooks
-├── lib/                # Utility functions and helpers
-├── pages/              # Application pages
-│   ├── Login.tsx       # Authentication page
-│   ├── Dashboard.tsx   # Main dashboard
-│   ├── Courses.tsx     # Courses overview
-│   ├── CourseDetails.tsx  # Category view of courses
-│   ├── CourseView.tsx     # Individual course view
-│   ├── Test.tsx        # Tests overview
-│   ├── TestDetails.tsx # Category view of tests
-│   ├── TakeTest.tsx    # Test-taking interface
-│   └── NotFound.tsx    # 404 page
-├── utils/              # Utility functions
-│   ├── auth.ts         # Authentication helpers
-│   └── mockData.ts     # Mock data for development
-├── App.tsx             # Main application component
-└── main.tsx            # Entry point
-```
+## Tech Stack
+- **Frontend**: React.js with JavaScript
+- **UI Components**: Shadcn/UI components library
+- **Styling**: Tailwind CSS
+- **Routing**: React Router
+- **State Management**: React Query
+- **Charts**: Recharts
 
 ## Getting Started
 
 ### Prerequisites
-
-- Node.js (v14 or higher)
+- Node.js (v16 or higher)
 - npm or yarn package manager
 
 ### Installation
-
 1. Clone the repository
 ```bash
-git clone https://github.com/your-username/rx-lms.git
+git clone https://github.com/your-repo/rx-lms.git
 cd rx-lms
 ```
 
@@ -85,136 +47,75 @@ npm run dev
 yarn dev
 ```
 
-4. Open your browser and navigate to http://localhost:5173
+4. Open your browser and navigate to `http://localhost:8080`
 
-### Test Account
+## Connecting with Backend
+To connect this frontend with a Node.js and Express backend:
 
-Use the following credentials to log in:
-- **Username:** Admin
-- **Password:** Admin@123
-
-## Backend Integration
-
-This frontend is designed to be easily integrated with a Node.js and Express.js backend. Here's how to connect the frontend to your backend:
-
-1. Set up environment variables for API endpoints in a `.env` file:
-```
-VITE_API_URL=http://localhost:3000/api
+1. Create a new Express project:
+```bash
+mkdir rx-lms-backend
+cd rx-lms-backend
+npm init -y
+npm install express cors mongoose dotenv
 ```
 
-2. Replace the mock API calls in `utils/` with real API calls. For example:
-```typescript
-// Before (mock data):
-export const getCourses = () => {
-  return courses;
-};
+2. Set up your Express server:
+```javascript
+// server.js
+const express = require('express');
+const cors = require('cors');
+const mongoose = require('mongoose');
+require('dotenv').config();
 
-// After (real API):
-export const getCourses = async () => {
-  const response = await fetch(`${import.meta.env.VITE_API_URL}/courses`);
-  if (!response.ok) throw new Error('Failed to fetch courses');
+const app = express();
+const PORT = process.env.PORT || 5000;
+
+// Middleware
+app.use(cors());
+app.use(express.json());
+
+// Routes
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/courses', require('./routes/courses'));
+app.use('/api/tests', require('./routes/tests'));
+
+// Connect to MongoDB
+mongoose.connect(process.env.MONGODB_URI)
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.log(err));
+
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+```
+
+3. Update the frontend API utilities to connect to your backend:
+```javascript
+// src/utils/api.js
+const API_URL = 'http://localhost:5000/api';
+
+export const fetchCourses = async () => {
+  const response = await fetch(`${API_URL}/courses`);
   return response.json();
 };
+
+// Add more API methods as needed
 ```
 
-3. Replace the authentication logic in `utils/auth.ts` with JWT authentication:
-```typescript
-// Before (mock auth):
-export const login = (username: string, password: string) => {
-  if (username === 'Admin' && password === 'Admin@123') {
-    localStorage.setItem('user', JSON.stringify({ username }));
-    return true;
-  }
-  return false;
-};
+## Future Enhancements
+- Implement real-time quiz feedback and progress tracking
+- Add interactive learning tools like flashcards and simulations
+- Develop a mobile app version for on-the-go learning
+- Integrate video conferencing for virtual classroom sessions
+- Implement AI-powered learning path recommendations
+- Add gamification elements to increase engagement
 
-// After (JWT auth):
-export const login = async (username: string, password: string) => {
-  const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ username, password }),
-  });
-  
-  if (!response.ok) return false;
-  
-  const { token, user } = await response.json();
-  localStorage.setItem('token', token);
-  localStorage.setItem('user', JSON.stringify(user));
-  return true;
-};
-```
-
-4. Update API request functions to include the authentication token:
-```typescript
-const fetchWithAuth = async (url: string, options = {}) => {
-  const token = localStorage.getItem('token');
-  return fetch(url, {
-    ...options,
-    headers: {
-      ...options.headers,
-      'Authorization': `Bearer ${token}`,
-    },
-  });
-};
-```
-
-## Customization
-
-### Theming
-
-The application uses a custom color scheme defined in `tailwind.config.ts`. To modify the colors:
-
-1. Open `tailwind.config.ts`
-2. Update the color values in the theme section:
-```typescript
-// Current colors
-maroon: '#750d1f',
-green: '#125b48',
-```
-
-### Adding New Features
-
-To add new features to the application:
-
-1. Create any necessary components in the `components/` directory
-2. Add new pages in the `pages/` directory
-3. Update routing in `App.tsx` to include the new pages
-4. Modify the navigation in `Navigation.tsx` if needed
-
-## Deployment
-
-### Build for Production
-
-```bash
-npm run build
-# or
-yarn build
-```
-
-This will create a `dist` directory with optimized production files.
-
-### Deploying to a Server
-
-Upload the contents of the `dist` directory to your web server or use a service like Netlify, Vercel, or GitHub Pages.
-
-### Environment Variables
-
-For production, set the appropriate environment variables:
-
-```
-VITE_API_URL=https://your-api-server.com/api
-```
-
-## Contributing
-
-1. Fork the repository
-2. Create a new branch (`git checkout -b feature/your-feature`)
-3. Make your changes
-4. Commit your changes (`git commit -m 'Add some feature'`)
-5. Push to the branch (`git push origin feature/your-feature`)
-6. Open a Pull Request
+## Innovation Ideas
+- **VR/AR Integration**: Create immersive pharmaceutical simulations
+- **Blockchain Certification**: Use blockchain for verifiable credentials
+- **Peer Learning Networks**: Implement peer-to-peer learning communities
+- **Microlearning Modules**: Break content into digestible micro-lessons
+- **Adaptive Learning Paths**: Personalize content based on performance
+- **Scenario-Based Assessments**: Create real-world problem-solving tests
 
 ## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
+[MIT](LICENSE)
