@@ -16,16 +16,16 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 120 100% 20%;  /* Dark Green */
+    --primary: 164 67% 21%;  /* Dark Green - #125b48 */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 100% 25%;  /* Maroon */
+    --secondary: 350 77% 26%;  /* Maroon - #750d1f */
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 0 0% 96%;  /* Light Gray */
+    --muted: 0 0% 95%;  /* Light Gray - #f3f3f3 */
     --muted-foreground: 215.4 16.3% 46.9%;
 
-    --accent: 0 0% 83%;  /* Medium Gray */
+    --accent: 0 0% 85%;  /* Medium Gray - #d9d9d9 */
     --accent-foreground: 222.2 47.4% 11.2%;
 
     --destructive: 0 84.2% 60.2%;
@@ -132,13 +132,13 @@
   .lms-button-primary {
     @apply bg-green text-white px-6 py-2 rounded-md font-medium transition-colors duration-200 
            hover:bg-dark-green focus:outline-none focus:ring-2 focus:ring-green focus:ring-opacity-50 
-           uppercase tracking-wider;
+           uppercase tracking-wider shadow-sm;
   }
 
   .lms-button-secondary {
     @apply bg-maroon text-white px-6 py-2 rounded-md font-medium transition-colors duration-200 
            hover:bg-dark-maroon focus:outline-none focus:ring-2 focus:ring-maroon focus:ring-opacity-50
-           uppercase tracking-wider;
+           uppercase tracking-wider shadow-sm;
   }
 
   .lms-button-outline {
@@ -148,12 +148,17 @@
   }
 
   .lms-input {
-    @apply bg-medium-gray rounded-md px-4 py-3 w-full focus:outline-none focus:ring-2 focus:ring-green;
+    @apply bg-white border border-medium-gray rounded-md px-4 py-3 w-full focus:outline-none focus:ring-2 focus:ring-green shadow-sm;
   }
 
   .lms-dropdown {
     @apply bg-green text-white px-4 py-2 rounded-md inline-flex items-center space-x-2 
-           hover:bg-dark-green focus:outline-none focus:ring-2 focus:ring-green;
+           hover:bg-dark-green focus:outline-none focus:ring-2 focus:ring-green shadow-sm;
+  }
+  
+  .lms-select {
+    @apply bg-white border border-medium-gray rounded-md px-4 py-2 pr-8 appearance-none
+           focus:outline-none focus:ring-2 focus:ring-green relative shadow-sm;
   }
 
   .lms-link {
@@ -175,6 +180,55 @@
   .nav-icon {
     @apply w-6 h-6;
   }
+  
+  .floating-nav {
+    @apply fixed bottom-4 left-1/2 transform -translate-x-1/2 w-auto max-w-[90%] rounded-full bg-green text-white 
+           shadow-float z-10 px-4 py-2;
+  }
+  
+  .filter-dropdown {
+    @apply relative inline-block w-full md:w-64;
+  }
+  
+  .filter-dropdown-toggle {
+    @apply flex items-center justify-between bg-white border border-gray-300 rounded-md px-4 py-2 w-full text-left shadow-sm;
+  }
+  
+  .card-badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+  
+  .test-progress-indicator {
+    @apply h-1 bg-gray-200 rounded-full overflow-hidden mb-4;
+  }
+  
+  .test-progress-bar {
+    @apply h-full bg-green transition-all duration-300;
+  }
+  
+  .instruction-card {
+    @apply bg-white rounded-lg shadow-md p-6 mb-6 border-l-4 border-green;
+  }
+  
+  .trophy-animation {
+    @apply animate-bounce;
+  }
+  
+  .results-grid {
+    @apply grid grid-cols-2 gap-4 my-4;
+  }
+  
+  .result-item {
+    @apply flex justify-between items-center p-3 bg-light-gray rounded-md;
+  }
+  
+  .slide-animation {
+    @apply transition-all duration-300 transform;
+  }
+  
+  .content-section {
+    @apply py-6;
+  }
 }
 
 /* Animation Classes */
@@ -190,4 +244,34 @@
   @apply relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 
          after:bg-green after:transform after:scale-x-0 after:transition-transform 
          after:duration-300 hover:after:scale-x-100 after:origin-bottom-left;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  @apply w-2 h-2;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-light-gray rounded-full;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-green bg-opacity-70 rounded-full hover:bg-opacity-100;
+}
+
+/* Custom animations */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.float-animation {
+  animation: float 4s ease-in-out infinite;
 }

@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { LayoutGrid, BookOpen, CheckSquare } from 'lucide-react';
+import { LayoutDashboard, GraduationCap, FileCheck } from 'lucide-react';
 
 const Navigation: React.FC = () => {
   const location = useLocation();
@@ -14,30 +14,30 @@ const Navigation: React.FC = () => {
   };
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 h-16 bg-green text-white z-10 animate-slide-in-bottom md:animate-none">
-      <div className="grid grid-cols-3 h-full max-w-3xl mx-auto">
+    <nav className="fixed bottom-4 left-1/2 transform -translate-x-1/2 h-16 bg-green rounded-full text-white z-10 shadow-float animate-slide-in-bottom md:animate-none">
+      <div className="grid grid-cols-3 h-full max-w-md mx-auto px-8">
         <Link 
           to="/" 
-          className={`${isActive('/') ? 'nav-item-active' : 'nav-item-inactive'} nav-item`}
+          className={`${isActive('/') ? 'nav-item-active' : 'nav-item-inactive'} nav-item px-4`}
         >
-          <LayoutGrid className="nav-icon" />
-          <span>DASHBOARD</span>
+          <LayoutDashboard className="nav-icon" />
+          <span className="text-xs tracking-wide">DASHBOARD</span>
         </Link>
         
         <Link 
           to="/courses" 
-          className={`${isActive('/courses') ? 'nav-item-active' : 'nav-item-inactive'} nav-item`}
+          className={`${isActive('/courses') ? 'nav-item-active' : 'nav-item-inactive'} nav-item px-4`}
         >
-          <BookOpen className="nav-icon" />
-          <span>COURSES</span>
+          <GraduationCap className="nav-icon" />
+          <span className="text-xs tracking-wide">COURSES</span>
         </Link>
         
         <Link 
           to="/test" 
-          className={`${isActive('/test') ? 'nav-item-active' : 'nav-item-inactive'} nav-item`}
+          className={`${isActive('/test') ? 'nav-item-active' : 'nav-item-inactive'} nav-item px-4`}
         >
-          <CheckSquare className="nav-icon" />
-          <span>TEST</span>
+          <FileCheck className="nav-icon" />
+          <span className="text-xs tracking-wide">TEST</span>
         </Link>
       </div>
     </nav>

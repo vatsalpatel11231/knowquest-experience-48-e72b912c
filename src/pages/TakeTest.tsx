@@ -4,6 +4,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { isAuthenticated } from '@/utils/auth';
 import { tests, questions } from '@/utils/mockData';
 import ResultModal from '@/components/ResultModal';
+import TestInstructions from '@/components/TestInstructions';
+import { CheckCircle, Clock, ArrowLeft } from 'lucide-react';
 
 const TakeTest: React.FC = () => {
   const navigate = useNavigate();
@@ -15,6 +17,7 @@ const TakeTest: React.FC = () => {
   const [timeLeft, setTimeLeft] = useState(300); // 5 minutes in seconds
   const [showResults, setShowResults] = useState(false);
   const [score, setScore] = useState(0);
+  const [showInstructions, setShowInstructions] = useState(true);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
@@ -34,6 +37,19 @@ const TakeTest: React.FC = () => {
     setTest(foundTest);
     setLoading(false);
     
+    return () => {
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+      }
+    };
+  }, [testId, navigate]);
+
+  const startTest = () => {
+    setShowInstructions(false);
+    
+    // Initialize array of empty answers
+    setSelectedAnswers(new Array(questions.length).fill(''));
+    
     // Start timer
     timerRef.current = setInterval(() => {
       setTimeLeft((prevTime) => {
@@ -46,13 +62,7 @@ const TakeTest: React.FC = () => {
         return prevTime - 1;
       });
     }, 1000);
-    
-    return () => {
-      if (timerRef.current) {
-        clearInterval(timerRef.current);
-      }
-    };
-  }, [testId, navigate]);
+  };
 
   const formatTime = (seconds: number): string => {
     const minutes = Math.floor(seconds / 60);
@@ -104,10 +114,7 @@ const TakeTest: React.FC = () => {
             onClick={() => navigate(-1)} 
             className="mr-4 text-white"
           >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M19 12H5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M12 19L5 12L12 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
+            <ArrowLeft size={24} />
           </button>
           <h1 className="text-xl font-bold">TAKE TEST</h1>
         </div>
@@ -123,6 +130,33 @@ const TakeTest: React.FC = () => {
     );
   }
 
+  // Show instructions before starting the test
+  if (showInstructions) {
+    return (
+      <div className="min-h-screen bg-light-gray flex flex-col">
+        <div className="bg-maroon text-white p-4 flex items-center">
+          <button 
+            onClick={() => navigate(-1)} 
+            className="mr-4 text-white"
+            aria-label="Go back"
+          >
+            <ArrowLeft size={24} />
+          </button>
+          <h1 className="text-xl font-bold">TAKE TEST</h1>
+        </div>
+        
+        <div className="container mx-auto p-6 flex-1">
+          <TestInstructions 
+            testName={test?.name || "Selling Skills Test"}
+            totalQuestions={questions.length}
+            timeLimit={5}
+            onStartTest={startTest}
+          />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-light-gray flex flex-col">
       <div className="bg-maroon text-white p-4 flex items-center">
@@ -131,39 +165,44 @@ const TakeTest: React.FC = () => {
           className="mr-4 text-white"
           aria-label="Go back"
         >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M19 12H5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            <path d="M12 19L5 12L12 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
+          <ArrowLeft size={24} />
         </button>
         <h1 className="text-xl font-bold">TAKE TEST</h1>
       </div>
       
       <div className="container mx-auto p-6 flex-1">
-        <div className="flex justify-end mb-4">
-          <div className="bg-maroon text-white px-4 py-2 rounded-md">
-            Timer: {formatTime(timeLeft)}
+        <div className="flex justify-between items-center mb-4">
+          <div className="bg-white px-4 py-2 rounded-md shadow-sm flex items-center">
+            <CheckCircle className="text-green mr-2" size={18} />
+            <span className="text-sm font-medium">Question {currentQuestion + 1} of {questions.length}</span>
           </div>
+          
+          <div className="bg-maroon text-white px-4 py-2 rounded-md shadow-sm flex items-center">
+            <Clock className="mr-2" size={18} />
+            <span className="font-medium">Timer: {formatTime(timeLeft)}</span>
+          </div>
+        </div>
+        
+        {/* Progress bar */}
+        <div className="test-progress-indicator">
+          <div 
+            className="test-progress-bar" 
+            style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
+          ></div>
         </div>
         
         <div className="bg-white rounded-lg shadow-md overflow-hidden">
           <div className="lg:flex">
             {/* Left side - Image and test title */}
             <div className="lg:w-1/3 bg-gray-100 p-6 flex flex-col">
-              <button 
-                className="bg-green text-white px-6 py-2 rounded-md self-start mb-6 hover:bg-dark-green transition-colors"
-              >
-                START TEST
-              </button>
-              
               <h2 className="text-xl font-bold mb-2">{test?.name || "Selling Skills Test"}</h2>
               <p className="text-gray-600 mb-4">Answer the question below</p>
               
               <div className="flex-1 flex items-center justify-center">
                 <img 
-                  src="/lovable-uploads/84e0eefa-b5a0-4daa-8281-fc69bdf8d6ad.png" 
+                  src="/lovable-uploads/749c6bb9-2756-4949-9c8e-dadbae9b822e.png" 
                   alt="Test" 
-                  className="max-w-full h-auto rounded-md"
+                  className="max-w-full h-auto rounded-md shadow-sm"
                 />
               </div>
             </div>
@@ -171,8 +210,8 @@ const TakeTest: React.FC = () => {
             {/* Right side - Question */}
             <div className="lg:w-2/3 p-6">
               <div className="mb-4">
-                <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700">
-                  Question {currentQuestion + 1}/{questions.length}
+                <span className="inline-block bg-green bg-opacity-10 text-green rounded-full px-3 py-1 text-sm font-semibold">
+                  Question {currentQuestion + 1}
                 </span>
               </div>
               
@@ -182,7 +221,11 @@ const TakeTest: React.FC = () => {
                 {questions[currentQuestion]?.options.map((option, index) => (
                   <label 
                     key={index} 
-                    className="flex items-center cursor-pointer"
+                    className={`flex items-center p-3 rounded-lg cursor-pointer transition-colors duration-200 ${
+                      selectedAnswers[currentQuestion] === option 
+                        ? 'bg-green bg-opacity-10 border border-green' 
+                        : 'bg-light-gray hover:bg-gray-200'
+                    }`}
                   >
                     <input
                       type="radio"
@@ -190,9 +233,13 @@ const TakeTest: React.FC = () => {
                       value={option}
                       checked={selectedAnswers[currentQuestion] === option}
                       onChange={() => handleAnswerSelect(option)}
-                      className="mr-2 h-4 w-4 accent-green"
+                      className="mr-3 h-4 w-4 accent-green"
                     />
-                    <span className="text-gray-700">{option}</span>
+                    <span className={`${
+                      selectedAnswers[currentQuestion] === option 
+                        ? 'text-green font-medium' 
+                        : 'text-gray-700'
+                    }`}>{option}</span>
                   </label>
                 ))}
               </div>
@@ -202,9 +249,9 @@ const TakeTest: React.FC = () => {
                   <button
                     onClick={handleNext}
                     disabled={!selectedAnswers[currentQuestion]}
-                    className={`bg-green text-white px-6 py-2 rounded-md ${
+                    className={`lms-button-primary ${
                       !selectedAnswers[currentQuestion] ? 'opacity-50 cursor-not-allowed' : 'hover:bg-dark-green'
-                    } transition-colors`}
+                    }`}
                   >
                     NEXT
                   </button>
@@ -212,9 +259,9 @@ const TakeTest: React.FC = () => {
                   <button
                     onClick={handleGetScore}
                     disabled={!selectedAnswers[currentQuestion]}
-                    className={`bg-green text-white px-6 py-2 rounded-md ${
+                    className={`lms-button-primary ${
                       !selectedAnswers[currentQuestion] ? 'opacity-50 cursor-not-allowed' : 'hover:bg-dark-green'
-                    } transition-colors`}
+                    }`}
                   >
                     GET SCORE
                   </button>

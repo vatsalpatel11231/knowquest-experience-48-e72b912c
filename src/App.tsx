@@ -11,6 +11,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Courses from "./pages/Courses";
 import CourseDetails from "./pages/CourseDetails";
+import CourseView from "./pages/CourseView";
 import Test from "./pages/Test";
 import TestDetails from "./pages/TestDetails";
 import TakeTest from "./pages/TakeTest";
@@ -52,6 +53,12 @@ const App = () => (
           <Route path="/courses/:category" element={
             <ProtectedRoute>
               <CourseDetails />
+            </ProtectedRoute>
+          } />
+          
+          <Route path="/courses/:category/:courseId" element={
+            <ProtectedRoute>
+              <CourseView />
             </ProtectedRoute>
           } />
           

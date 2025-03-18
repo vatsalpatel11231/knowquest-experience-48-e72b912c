@@ -67,14 +67,15 @@ export default {
           border: 'hsl(var(--sidebar-border))',
           ring: 'hsl(var(--sidebar-ring))'
         },
-        // LMS specific colors
-        maroon: '#800000',
-        'dark-maroon': '#600000',
-        'light-maroon': '#A00000',
-        green: '#006400',
-        'dark-green': '#004d00',
-        'light-green': '#90EE90',
-        'light-gray': '#F5F5F5',
+        // LMS specific colors - updated with new colors
+        maroon: '#750d1f',
+        'dark-maroon': '#5a0a18',
+        'light-maroon': '#8f1026',
+        green: '#125b48',
+        'dark-green': '#0e4637',
+        'light-green': '#1a7d63',
+        'header-gray': '#d9d9d9',
+        'light-gray': '#f3f3f3',
         'medium-gray': '#D3D3D3',
         'light-pink': '#FFB6C1',
       },
@@ -166,6 +167,9 @@ export default {
       boxShadow: {
         'glass': '0 4px 30px rgba(0, 0, 0, 0.1)',
         'glass-lg': '0 8px 32px rgba(0, 0, 0, 0.1)',
+        'float': '0 8px 16px rgba(0, 0, 0, 0.1)',
+        'card': '0 4px 6px rgba(0, 0, 0, 0.05)',
+        'elevated': '0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)',
       },
       backgroundImage: {
         'glass-gradient': 'linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05))',
