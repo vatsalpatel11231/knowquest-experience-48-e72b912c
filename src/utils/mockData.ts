@@ -221,3 +221,8 @@ export const getCoursesByCategory = (category: string): Course[] => {
 export const getTestsByCategory = (category: string): Test[] => {
   return tests.filter(test => test.category === category);
 };
+
+// Add the missing getCourseById function
+export const getCourseById = (id: string): Course | undefined => {
+  return courses.find(course => course.id === id);
+};
